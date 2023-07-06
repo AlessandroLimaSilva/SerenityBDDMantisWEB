@@ -45,8 +45,8 @@ public class LoginPage extends BasePage{
 
     public void acessaTelaDeLogin(){
         this.openNewTab();
-        this.open();
-        //driver.navigate().to(GlobalParameters.URL_DEFAULT);
+        //this.open();
+        driver.navigate().to(GlobalParameters.URL_DEFAULT);
         waitUntilPageReady();
     }
 
