@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
         glue = {
                 "classpath:org.ale.stepdefinitions",
                 "classpath:org.ale.hooks",},
-        tags = "@automatizado")
+        tags = "@installlDatabaseMantisBT or @MontaOBancoDeDados")
 
 public class InstallTest {
 }

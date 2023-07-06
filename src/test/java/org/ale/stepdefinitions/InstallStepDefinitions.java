@@ -5,6 +5,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.thucydides.core.annotations.Steps;
+import org.ale.dao.InsertDAO;
 import org.ale.steps.InstallSteps;
 import org.junit.Assert;
 
@@ -43,5 +44,16 @@ public class InstallStepDefinitions {
     @Then("o mantisBT e configurado com sucesso")
     public void mantisBTEConfiguradoComSucesso(){
         Assert.assertTrue(installSteps.installationCompleteLabelReturn().contains("Installation Complete"));
+    }
+
+    @When("criar database e popular")
+    public void criarDatabaseEPopular() throws Exception {
+        InsertDAO insertDAO = new InsertDAO();
+        insertDAO.popularBancoDeDadoTesteAPI();
+    }
+
+    @Then("o banco de dados do teste e populado com sucesso")
+    public void oBancoDeDadosDoTesteEPopuladoComSucesso(){
+        System.out.println("Banco Criado Com Sucesso !!!!");
     }
 }

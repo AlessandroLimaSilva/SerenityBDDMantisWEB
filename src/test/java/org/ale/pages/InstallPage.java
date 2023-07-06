@@ -1,5 +1,6 @@
 package org.ale.pages;
 
+import org.ale.utils.GlobalParameters;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,7 +10,7 @@ import org.slf4j.LoggerFactory;
 public class InstallPage extends BasePage{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginPage.class);
-    private static final String INSTALL_URL = "http://localhost:8989/admin/install.php";
+    private static final String INSTALL_URL = GlobalParameters.DB_URL_MANTISBT;
 
     @FindBy(xpath = "//select[@id='db_type']")
     private WebElement typeOfDataBaseSelect;

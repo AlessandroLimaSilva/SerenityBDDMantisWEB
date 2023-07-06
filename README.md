@@ -618,7 +618,7 @@ Para começar a utilizar este framework de teste de API, siga estas etapas:
 
     #### Preencha Repository URL
     ```bash
-    https://github.com/AlessandroLimaSilva/restassuredDemo
+    https://github.com/AlessandroLimaSilva/SerenityBDDMantisWEB
     ```
     ![Texto alternativo](src/test/resources/readmeImg/jenkins22.png)
 
@@ -676,7 +676,7 @@ Para começar a utilizar este framework de teste de API, siga estas etapas:
 
     #### Preencha Goals
     ```bash
-    clean verify "-Dcucumber.filters.tags= @automatizado"
+      clean verify "-Dcucumber.filter.tags=@automatizado" "-Denviromment=$NAVEGADOR"
     ```
     ![Texto alternativo](src/test/resources/readmeImg/jenkins31.png)
 
@@ -706,7 +706,7 @@ Para começar a utilizar este framework de teste de API, siga estas etapas:
 
     #### Preencha HTML directory to archive, tenha cuidado para preencher é necessario o espaço antes de 2023, hello bug jenkins. 
     ```bash
-    ./target/relatorio/ 2023/
+    ./target/site/ serenity/
     ```
     ![Texto alternativo](src/test/resources/readmeImg/jenkins38.png)
 
