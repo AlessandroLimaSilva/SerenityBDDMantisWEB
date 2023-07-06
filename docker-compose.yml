@@ -1,0 +1,110 @@
+version: '3.4'
+
+services:
+  mantisbt:
+    image: vimagick/mantisbt:latest
+    ports:
+      - "8989:80"
+    networks:
+      - my-networks   
+    links:
+      - mysql
+    restart: always
+    depends_on:
+      - mysql
+    
+
+  mysql:
+      image: mysql:5.7
+      volumes:
+        - ./data:/var/lib/mysql
+      ports:
+      - "3306:3306"  
+      networks:
+        -  my-networks  
+      environment:
+        - MYSQL_ROOT_PASSWORD=root
+        - MYSQL_DATABASE=bugtracker
+        - MYSQL_USER=mantisbt
+        - MYSQL_PASSWORD=mantisbt
+      restart: always  
+
+  selenium_hub:
+     image: selenium/hub:3.141.59
+     container_name: selenium-hub
+     privileged: true
+     networks:
+       -  my-networks
+     restart: always
+     user: root  
+     ports:
+       - '4444:4444'
+     environment:
+       - GRID_TIMEOUT=300
+       - GRID_BROWSER_TIMEOUT=300
+       - GRID_MAX_SESSION=3
+       - GRID_MAX_SESSION=10
+       - GRID_MAX_INSTANCES=6    
+
+  chrome:
+      image: selenium/node-chrome-debug:3.141.59
+      network_mode: host
+      depends_on:
+        - selenium_hub
+      environment:
+        - START_XVFB=true
+        - HUB_HOST=localhost
+        - HUB_PORT=4444
+        - NODE_PORT=5556
+      restart: always  
+      volumes:
+        - '.chrome:/home/seluser/'
+      
+  firefox:
+    image: selenium/node-firefox-debug:3.141.59
+    network_mode: host 
+    depends_on:
+      - selenium_hub
+    restart: always  
+    environment:
+      - START_XVFB=true
+      - HUB_HOST=localhost
+      - HUB_PORT=4444
+    volumes:
+      - '.fox:/home/seluser/'
+     
+  opera:
+    image: selenium/node-opera-debug:3.141.59
+    network_mode: host 
+    depends_on:
+      - selenium_hub
+    restart: always  
+    environment:
+      - START_XVFB=true
+      - HUB_HOST=localhost
+      - HUB_PORT=4444
+      - NODE_PORT=5557
+    volumes:
+      - '.opera:/home/seluser/'
+  
+  jenkins:
+     build:
+       context: .
+       dockerfile: jenkinsFile
+     networks:
+       - my-networks
+     privileged: true
+     user: root
+     restart: always
+     ports:
+      - "8081:8080"
+      - "50000:50000"
+     container_name: jenkins
+     volumes:
+      - '.jenkins:/var/jenkins_home'
+      - '.docker.sock:/var/run/docker.sock'
+      - '.docker:/usr/local/bin/docker'
+        
+networks:
+  my-networks:
+    driver: bridge  
