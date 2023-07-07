@@ -2,8 +2,15 @@ FROM jenkins/jenkins:lts-jdk11
 
 USER root
 
-# Instalação do Maven e libxcb1
-RUN apt-get update && apt-get install -y --no-install-recommends apt-utils maven libxcb1
+# Instalação do Maven, libxcb1 e dependências do ChromeDriver
+RUN apt-get update && apt-get install -y --no-install-recommends apt-utils maven libxcb1 \
+    libgconf-2-4 libnss3 libxi6 libgconf-2-4 libgbm1
+
+# Download e instalação do ChromeDriver versão 94.0.4606.41
+RUN wget -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/94.0.4606.41/chromedriver_linux64.zip && \
+    unzip /tmp/chromedriver.zip -d /usr/local/bin/ && \
+    rm /tmp/chromedriver.zip && \
+    chmod +x /usr/local/bin/chromedriver
 
 USER jenkins
 
@@ -16,4 +23,3 @@ RUN jenkins-plugin-cli --plugin-file /usr/share/jenkins/ref/plugins.txt
 
 # Expor as portas do Jenkins
 EXPOSE 8080 50000
-
