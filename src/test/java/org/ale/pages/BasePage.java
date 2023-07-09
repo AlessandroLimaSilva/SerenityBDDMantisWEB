@@ -89,12 +89,11 @@ public class BasePage extends PageObject {
     public static void validarURLS() {
         ArrayList<String> url = new ArrayList<>();
         ArrayList<Integer> port = new ArrayList<>();
-        url.add("http://mantisbt");
-        url.add("http://mysql");
-        url.add("http://selenium-hub");
-        url.add("http://localhost");
-        url.add("http://localhost");
-        url.add("http://localhost");
+        url.add("mantisbt");
+        url.add("mysql");
+        url.add("selenium-hub");
+        url.add("localhost");
+        url.add("0.0.0.0");
         port.add(80);
         port.add(3306);
         port.add(4444);
@@ -107,9 +106,8 @@ public class BasePage extends PageObject {
                 boolean isPortAvailable = isPortAvailable(por);
                 boolean isURLAndPortAvailable = isURLAndPortAvailable(ur, por);
 
-                LOGGER.info("URL available: " + isURLAvailable);
-                LOGGER.info("Port available: " + isPortAvailable);
-                LOGGER.info("URL and port available: " + isURLAndPortAvailable);
+                //LOGGER.info(ur+" Acessivel: " + isURLAvailable+" e a porta : "+por+" ACESSIVEL : "+isPortAvailable);
+                LOGGER.info(ur+" and port "+por+" ACESSIVEL: " + isURLAndPortAvailable);
             }
         }
     }
