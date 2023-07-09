@@ -1,4 +1,4 @@
-enviroment=hml
+enviroment=dev
 
 #<== hml ==>
 hml.url.default=http://mantisbt:80

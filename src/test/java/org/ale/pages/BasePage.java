@@ -23,10 +23,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.Socket;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BasePage extends PageObject {
@@ -52,11 +54,72 @@ public class BasePage extends PageObject {
         this.wait = new WebDriverWait(driver, Duration.ofMillis(timeOutDefault));
         this.javaScriptExecutor = (JavascriptExecutor) driver;
         LOGGER.info("Driver Instanciado : "+driver.getClass().getSimpleName());
+        validarURLS();
     }
 
+    //Deletar apos validar as urls
+
+    public static boolean isURLAvailable(String url) {
+        try {
+            new Socket(url, 80).close();
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
+    }
+
+    public static boolean isPortAvailable(int port) {
+        try {
+            new Socket("localhost", port).close();
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
+    }
+
+    public static boolean isURLAndPortAvailable(String url, int port) {
+        try {
+            new Socket(url, port).close();
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
+    }
+
+    public static void validarURLS() {
+        ArrayList<String> url = new ArrayList<>();
+        ArrayList<Integer> port = new ArrayList<>();
+        url.add("http://mantisbt");
+        url.add("http://mysql");
+        url.add("http://selenium-hub");
+        url.add("http://localhost");
+        url.add("http://localhost");
+        url.add("http://localhost");
+        port.add(80);
+        port.add(3306);
+        port.add(4444);
+        port.add(8989);
+        port.add(3306);
+        port.add(4444);
+        for(String ur:url){
+            for(Integer por:port){
+                boolean isURLAvailable = isURLAvailable(ur);
+                boolean isPortAvailable = isPortAvailable(por);
+                boolean isURLAndPortAvailable = isURLAndPortAvailable(ur, por);
+
+                LOGGER.info("URL available: " + isURLAvailable);
+                LOGGER.info("Port available: " + isPortAvailable);
+                LOGGER.info("URL and port available: " + isURLAndPortAvailable);
+            }
+        }
+    }
+
+    //Deletar apos validar as urls
     public void setMessageLoggerInfo(String message){
         LOGGER.info(message);
     }
+
+
 
     //Utils
     //Custom Actions
