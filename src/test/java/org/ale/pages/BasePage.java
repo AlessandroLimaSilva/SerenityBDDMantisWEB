@@ -51,6 +51,7 @@ public class BasePage extends PageObject {
         this.implicitTimeOutDefault = getImplicitWaitTimeout().toMillis();
         this.wait = new WebDriverWait(driver, Duration.ofMillis(timeOutDefault));
         this.javaScriptExecutor = (JavascriptExecutor) driver;
+        LOGGER.info("Driver Instanciado : "+driver.getClass().getSimpleName());
     }
 
     public void setMessageLoggerInfo(String message){

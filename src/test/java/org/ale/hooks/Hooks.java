@@ -15,24 +15,9 @@ import java.io.FileNotFoundException;
 
 public class Hooks {
 
-    @Before
-    public void setup() {
-        Runtime.getRuntime().addShutdownHook(new Thread() {
-            @Override
-            public void run() {
-                try {
-                    System.out.println("######################333 BeforeArtificial After ALL @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@22");
-                    InsertDAO insertDAO = new InsertDAO();
-                    insertDAO.popularBancoDeDadoTesteAPI();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
     @BeforeAll
     public static void beforeAll(){
+        System.setProperty("serenity.opentelemetry.enabled", "false");
         //new GlobalParameters();
         System.out.println("\nBEFORE ALL \n");
         System.out.printf(GlobalParameters.ENVIROMENT);
