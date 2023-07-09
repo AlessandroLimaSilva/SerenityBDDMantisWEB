@@ -1,10 +1,10 @@
-enviroment=dev
+enviroment=
 
 #<== hml ==>
 hml.url.default=mantisbt:80
 hml.db.url=jdbc:mysql://mysql:3306
 hml.db.url.mantis=jdbc:mysql://mysql:3306/bugtracker
-hml.db.url.teste=jdbc:mysql://mysql:3306/bugtracker/dadosdeteste
+hml.db.url.teste=jdbc:mysql://mysql:3306/dadosdeteste
 hml.db.name=
 hml.db.user=root
 hml.db.password=root
