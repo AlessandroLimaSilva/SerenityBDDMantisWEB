@@ -9,7 +9,7 @@ hml.db.name=
 hml.db.user=root
 hml.db.password=root
 hml.url.token=
-hml.autenticator.user=administrator
+hml.autenticator.user=Administrator
 hml.autenticator.password=root
 hml.token=
 

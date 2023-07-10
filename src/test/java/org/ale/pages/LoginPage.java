@@ -44,7 +44,6 @@ public class LoginPage extends BasePage{
 
     public void acessaTelaDeLogin(){
         this.openNewTab();
-        //this.open();
         LOGGER.info("ACESSANDO A URL : "+GlobalParameters.URL_DEFAULT);
         driver.navigate().to(GlobalParameters.URL_DEFAULT);
         waitUntilPageReady();
