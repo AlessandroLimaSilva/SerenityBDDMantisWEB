@@ -62,8 +62,9 @@ public class Utils {
         if (matcher.find()) {
             url = matcher.group();
         }
+        String resultado = url.replaceAll("http://[^/]+/", GlobalParameters.URL_DEFAULT.concat("/"));
 
-        return url;
+        return resultado;
     }
 
 

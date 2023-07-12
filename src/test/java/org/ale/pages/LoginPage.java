@@ -37,9 +37,10 @@ public class LoginPage extends BasePage{
     }
 
     public void acessaNovaUrl(String url){
+        LOGGER.info(url);
         driver.quit();
         this.openNewTab();
-        //driver.navigate().to(url);
+        driver.navigate().to(url);
         driver.switchTo().activeElement();
     }
 

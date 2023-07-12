@@ -9,6 +9,7 @@ import org.ale.dao.DeleteDao;
 import org.ale.dao.InsertDAO;
 import org.ale.dao.SelectDAO;
 import org.ale.steps.*;
+import org.ale.utils.Utils;
 import org.junit.Assert;
 import java.util.Map;
 
@@ -62,7 +63,7 @@ public class GerenciarUsuariosStepDefinitions {
         SelectDAO selectDAO = new SelectDAO();
         Map<String,Object> map = selectDAO.getUserForName(nomeUsuario);
         String url = selectDAO.getLinkEmail(map.get("email").toString());
-        loginSteps.abreUmaNovaAbaPeloJavaScriptEAcessaUmaURL(url);
+        loginSteps.abreUmaNovaAbaEAcessaUmaURL(Utils.limpaUrlEmail(url));
     }
 
     @When("o usuario redefinir sua senha")

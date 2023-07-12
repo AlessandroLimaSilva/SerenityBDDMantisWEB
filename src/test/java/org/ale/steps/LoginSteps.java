@@ -18,7 +18,7 @@ public class LoginSteps extends ScenarioSteps {
     }
 
     @Step("Acessa abre uma nova aba pelo javaScript e acessa uma url ")
-    public void abreUmaNovaAbaPeloJavaScriptEAcessaUmaURL(String url){
+    public void abreUmaNovaAbaEAcessaUmaURL(String url){
         loginPage.acessaNovaUrl(url);
     }
 

@@ -1,4 +1,4 @@
-enviroment=hml
+enviroment=local
 
 #<== hml ==>
 hml.url.default=http://mantisbt:80
@@ -27,10 +27,10 @@ dev.autenticator.password=root
 dev.token=
 
 #<== url's de acesso local atraves do linux==>
-local.url.default=http://localhost:8989
-local.db.url=jdbc:mysql://localhost:3306
-local.db.url.mantis=jdbc:mysql://localhost:3306/bugtracker
-local.db.url.teste=jdbc:mysql://localhost:3306/dadosdeteste
+local.url.default=http://mantisbt:80
+local.db.url=jdbc:mysql://172.22.0.2:3306
+local.db.url.mantis=jdbc:mysql://172.22.0.2:3306/bugtracker
+local.db.url.teste=jdbc:mysql://172.22.0.2:3306/dadosdeteste
 local.db.name=
 local.db.user=root
 local.db.password=root

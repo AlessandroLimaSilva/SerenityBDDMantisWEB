@@ -132,7 +132,7 @@ public class SelectDAO {
                 e.printStackTrace();
             }
         }
-        return Utils.limpaUrlEmail(resposta);
+        return resposta;
     }
 
 
