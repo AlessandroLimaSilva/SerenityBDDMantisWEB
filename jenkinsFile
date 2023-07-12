@@ -1,0 +1,21 @@
+FROM jenkins/jenkins:lts-jdk11
+
+USER root
+
+# Instalação do Maven, libxcb1 e dependências do ChromeDriver
+RUN apt-get update && apt-get install -y --no-install-recommends apt-utils maven libxcb1 \
+    libgconf-2-4 libnss3 libxi6 libgconf-2-4 libgbm1 curl unzip
+
+
+USER jenkins
+
+# Volume para armazenar dados do Jenkins
+VOLUME /var/jenkins_home
+
+COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
+
+RUN jenkins-plugin-cli --plugin-file /usr/share/jenkins/ref/plugins.txt
+
+# Expor as portas do Jenkins
+EXPOSE 8080 50000
+

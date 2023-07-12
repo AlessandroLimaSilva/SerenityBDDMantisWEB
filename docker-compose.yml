@@ -1,0 +1,135 @@
+version: '3.4'
+
+services:
+  mantisbt:
+    image: vimagick/mantisbt:latest
+    ports:
+      - "8989:80"
+    links:
+      - mysql
+    restart: always
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:5.7
+    volumes:
+      - ./data:/var/lib/mysql
+    ports:
+      - "3306:3306"  
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=bugtracker
+      - MYSQL_USER=mantisbt
+      - MYSQL_PASSWORD=mantisbt
+    restart: always  
+  
+  jenkins:
+    build:
+      context: .
+      dockerfile: jenkinsFile
+    depends_on:
+      - mantisbt    
+    privileged: true
+    user: root
+    restart: always
+    ports:
+      - "8081:8080"
+      - "50000:50000"
+    container_name: jenkins
+    volumes:
+      - '.jenkins:/var/jenkins_home'
+      - '.docker.sock:/var/run/docker.sock'
+      - '.docker:/usr/local/bin/docker'
+
+  chrome:
+    image: selenium/node-chrome:4.10.0-20230607
+    shm_size: 2gb
+    depends_on:
+      - selenium-hub
+    links:
+      - selenium-hub
+      - mantisbt
+      - jenkins
+    environment:
+      - SE_OPTS=--log-level FINE
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - SE_NODE_BROWSER_TIMEOUT=60000
+      - SE_NODE_TIMEOUT=60000
+      - SE_NODE_OVERRIDE_MAX_SESSIONS=true
+      - SE_NODE_MAX_SESSION=1
+      - SE_NODE_MAX_INSTANCES=1
+      - SE_NODE_CLEAN_UP_CYCLE=60000
+      - SE_NODE_UNREGISTER_IF_STILL_DOWN_AFTER=60000
+      - SE_NODE_NEW_SESSION_WAIT_TIMEOUT=60000
+      - TZ=America/Sao_Paulo
+      - VNC_NO_PASSWORD=1
+
+  edge:
+    image: selenium/node-edge:4.10.0-20230607
+    shm_size: 2gb
+    depends_on:
+      - selenium-hub
+    links:
+      - selenium-hub
+      - mantisbt
+      - jenkins  
+    environment:
+      - SE_OPTS=--log-level FINE
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - SE_NODE_BROWSER_TIMEOUT=60000
+      - SE_NODE_TIMEOUT=60000
+      - SE_NODE_OVERRIDE_MAX_SESSIONS=true
+      - SE_NODE_MAX_SESSION=1
+      - SE_NODE_MAX_INSTANCES=1
+      - SE_NODE_CLEAN_UP_CYCLE=60000
+      - SE_NODE_UNREGISTER_IF_STILL_DOWN_AFTER=60000
+      - SE_NODE_NEW_SESSION_WAIT_TIMEOUT=60000
+      - TZ=America/Sao_Paulo
+      - VNC_NO_PASSWORD=1
+
+  firefox:
+    image: selenium/node-firefox:4.10.0-20230607
+    shm_size: 2gb
+    depends_on:
+      - selenium-hub
+    links:
+      - selenium-hub
+      - mantisbt
+      - jenkins  
+    environment:
+      - SE_OPTS=--log-level FINE
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - SE_NODE_BROWSER_TIMEOUT=60000
+      - SE_NODE_TIMEOUT=60000
+      - SE_NODE_OVERRIDE_MAX_SESSIONS=true
+      - SE_NODE_MAX_SESSION=1
+      - SE_NODE_MAX_INSTANCES=1
+      - SE_NODE_CLEAN_UP_CYCLE=60000
+      - SE_NODE_UNREGISTER_IF_STILL_DOWN_AFTER=60000
+      - SE_NODE_NEW_SESSION_WAIT_TIMEOUT=60000
+      - TZ=America/Sao_Paulo
+      - VNC_NO_PASSWORD=1
+
+  selenium-hub:
+    image: selenium/hub:4.10.0-20230607
+    container_name: selenium-hub
+    depends_on:
+      - jenkins
+    links:
+      - mantisbt
+      - jenkins  
+    ports:
+      - "4442:4442"
+      - "4443:4443"
+      - "4444:4444"    
+        
+networks:
+  grid:
+    external: true
