@@ -16,8 +16,9 @@ public class LoginStepDefinitions {
     LoginSteps loginSteps;
 
     @Given("que o usuario esta logado como Administrator")
-    public void queEstouLogadoComoAdministrator() {
+    public void queEstouLogadoComoAdministrator() throws InterruptedException {
         loginSteps.acessaTelaDeLogin();
+        Thread.sleep(999999999);
         loginSteps.preencherNomeDeUsuarioInputTextArea(GlobalParameters.AUTHENTICATOR_USER);
         loginSteps.clicarEmEntrarNomeButton();
         loginSteps.preencherSenhaInputTextArea(GlobalParameters.AUTHENTICATOR_PASSWORD);
