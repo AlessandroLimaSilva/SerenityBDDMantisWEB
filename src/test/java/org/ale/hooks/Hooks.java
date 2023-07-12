@@ -18,9 +18,6 @@ public class Hooks {
     @BeforeAll
     public static void beforeAll(){
         System.setProperty("serenity.opentelemetry.enabled", "false");
-        //new GlobalParameters();
-        System.out.println("\nBEFORE ALL \n");
-        System.out.printf(GlobalParameters.ENVIROMENT);
     }
     @Before
     public void beforeScenario() throws FileNotFoundException {

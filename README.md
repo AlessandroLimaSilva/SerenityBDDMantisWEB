@@ -10,10 +10,11 @@ O ambiente de testes Docker contém os seguintes contêineres:
 - **MantisBT 2.22.1**: um sistema de gerenciamento de problemas e rastreamento de defeitos, usado para acompanhar e resolver problemas em um projeto de software.
 - **MySQL 5.7**: um sistema de gerenciamento de banco de dados relacional, utilizado para armazenar e recuperar dados necessários para os testes.
 - **Jenkins 2.401.1**: uma plataforma de automação de CI/CD (Integração Contínua/Entrega Contínua), que permite criar e executar pipelines de testes automatizados.
+- **Selenium Grid 4**: O Selenium Grid 4 é uma ferramenta de automação de testes que permite a execução simultânea de testes em diferentes navegadores e sistemas operacionais. Ele distribui os testes entre vários nós de execução para acelerar o processo de testes.
 
-A combinação do RestAssured com o ambiente de testes Docker nos permite realizar testes completos de ponta a ponta em APIs RESTful.
+A combinação do Serenity BDD com o ambiente de testes Jenkins junto ao Selenium Grid 4 no Docker nos permite realizar testes completos de ponta a ponta em automações.
 
-Vamos começar a aproveitar os benefícios deste ambiente de teste poderoso para automatizar e validar suas APIs RESTful usando o framework RestAssured!
+Vamos começar a aproveitar os benefícios deste ambiente de teste poderoso para automatizar e validar seus testes automatizados!
 
 
 # Framework de Teste de API com RestAssured
@@ -26,13 +27,11 @@ Este é um projeto de framework de teste de API altamente eficiente, desenvolvid
 
 - **Cucumber**: Aproveite o poder do BDD (Behavior-Driven Development) com o Cucumber, uma biblioteca que permite escrever testes em uma linguagem de domínio específica (Gherkin) e executá-los em um formato legível para não desenvolvedores. Isso facilita a colaboração entre equipes técnicas e não técnicas.
 
-- **RestAssured**: Simplifique a validação de APIs RESTful com o RestAssured, uma biblioteca Java poderosa e intuitiva que oferece uma sintaxe amigável para a criação de testes de integração de API. Através do RestAssured, você pode facilmente enviar requisições HTTP, validar respostas, extrair dados e muito mais.
+- **Selenium 4**: O Selenium 4 é uma atualização do popular framework de automação de testes que oferece suporte a recursos aprimorados, como suporte nativo para o W3C WebDriver, suporte para automação de aplicações desktop e uma API mais intuitiva e simplificada.
+
+- **Serenity BDD**: O SerenityBDD é um framework de automação de testes que oferece relatórios detalhados e legíveis e integração com BDD, permitindo uma abordagem orientada a comportamento nos testes automatizados.
 
 - **JUnit 4**: Aproveite os recursos do JUnit 4, um framework de teste unitário amplamente utilizado para Java. Ele permite que você defina casos de teste individuais, organize-os em suítes de testes e execute-os com eficiência. O JUnit 4 também oferece recursos avançados, como anotações de configuração e assertivas poderosas.
-
-- **Extent Reporter**: Desfrute de relatórios de testes detalhados e atraentes com o Extent Reporter, uma biblioteca que oferece recursos avançados de geração de relatórios. Com o Extent Reporter, você terá uma visão clara sobre o status dos testes executados, métricas de desempenho e resultados.
-
-- **Jackson Databind**: O Jackson Databind é uma biblioteca de serialização e desserialização JSON muito popular no ecossistema Java. Com ele, você pode converter facilmente objetos Java em formato JSON e vice-versa. Ele fornece uma maneira simples e eficiente de trabalhar com dados JSON em seus testes de API.
 
 - **MySQL**: Aproveite a integração com o MySQL para armazenar e gerenciar dados em seus testes. O MySQL é um sistema de gerenciamento de banco de dados relacional amplamente utilizado, conhecido por sua confiabilidade e desempenho. Com o MySQL, você pode criar tabelas, inserir dados, realizar consultas e muito mais, tornando-o uma escolha poderosa para o armazenamento e recuperação de dados em seus testes.
 
@@ -587,6 +586,8 @@ Para começar a utilizar este framework de teste de API, siga estas etapas:
     ####
     Mesmo criando uma rede, o SeleniumGrid cria outra rede em outra faixa de ips por isso precisamos pegar o ip das nossas aplicações. 
     ####
+    Todas as vezes em que for realizado um down no container sera necessario pegar os ips novamente.    
+    ####
     Esta é uma opção de adicionar as urls de um modo mais rapido so para fins de teste do projeto !
     ####
     O correto é adicionar no arquivo globalParameters.propeties e realizar um push no git do projeto.
@@ -603,7 +604,34 @@ Para começar a utilizar este framework de teste de API, siga estas etapas:
         e567daf99a79   vimagick/mantisbt:latest                "docker-php-entrypoi…"   About an hour ago   Up About an hour   0.0.0.0:8989->80/tcp, :::8989->80/tcp                                                      docker-mantisbt-1
         d4dcb849bc9a   mysql:5.7                               "docker-entrypoint.s…"   About an hour ago   Up About an hour   0.0.0.0:3306->3306/tcp, :::3306->3306/tcp, 33060/tcp                                       docker-mysql-1
      ``` 
-    - #### Pegue o container id do mantisbt e no terminal digite :
+    - #### Esta é a unica url que fica no serenity.properties em webdriver.remote.url, as demais estão em globalParameters.propeties.
+    - #### Pegue o container id do selenium hub e no terminal digite :
+    ````bash
+        code@Nitro:~/Documentos/docker$ sudo docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' e567daf99a79 
+        172.22.0.5
+    ````
+      - #### No Jenkins Selecione Esta construção é parametrizada.
+    ![Texto alternativo](src/test/resources/readmeImg/jenkins15.png)
+
+    #### Clique em Adicionar parametro
+    ![Texto alternativo](src/test/resources/readmeImg/jenkins16.png)
+
+    #### Clique em Parametro de texto
+    ![Texto alternativo](src/test/resources/readmeImg/jenkins217.png)
+
+    #### Preencha Nome
+    ```bash
+    SELENIUMGRIDURL
+    ```
+    ![Texto alternativo](src/test/resources/readmeImg/novoSelenium01.png)    
+
+    #### Agora iremos preencher valor padrão com a url do selenium hub, não se esqueça da porta 4444
+    ```bash
+    http://172.22.0.5:4444
+    ```
+    ![Texto alternativo](src/test/resources/readmeImg/novoSelenium02.png)
+
+    #### Pegue o container id do mantisbt e no terminal digite :
     ````bash
         code@Nitro:~/Documentos/docker$ sudo docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' e567daf99a79 
         172.21.0.3
@@ -746,6 +774,7 @@ Para começar a utilizar este framework de teste de API, siga estas etapas:
     sed -i "s|$AMBIENTE.db.url.mantis=.*|$AMBIENTE.db.url.mantis=$MYSQLMANTISURL|" src/globalParameters.propeties
     sed -i "s|$AMBIENTE.db.url.teste=.*|$AMBIENTE.db.url.teste=$MYSQLTESTEURL|" src/globalParameters.propeties
     sed -i "s|webdriver.remote.driver=.*|webdriver.remote.driver=$NAVEGADOR|" serenity.properties
+    sed -i "s|webdriver.remote.url=.*|webdriver.remote.url=$SELENIUMGRIDURL|" serenity.properties
 
     ```
     ![Texto alternativo](src/test/resources/readmeImg/novoEnviroment01.png)
@@ -841,24 +870,36 @@ Tambem iremos visualizar os relatorios gerados apos a execução dos testes.
    root
    ```
    #### Agora clique em entrar
+   
    ![Texto alternativo](src/test/resources/readmeImg/jenkins09.png)
 
-   #### Agora clique QA-API-MantisBT
-   ![Texto alternativo](src/test/resources/readmeImg/jenkins41.png)
+   #### Agora clique QA-MantisBT-WEB
+   ![Texto alternativo](src/test/resources/readmeImg/novoJenkins01.png)
 
    #### Agora clique me Construir com parâmetros 
-   ![Texto alternativo](src/test/resources/readmeImg/jenkins42.png) 
+   ![Texto alternativo](src/test/resources/readmeImg/novoJenkins02.png) 
 
-   #### O modo como foi configurado o job nos permite construir o teste em ambientes diferentes, so precisamos passar o token e o ambiente.
-   - #### Clique em construir, como ja passamos as informações de token e ambiente não precisamos modificar nenhuma informação.
-   ![Texto alternativo](src/test/resources/readmeImg/jenkins43.png)
+   #### O modo como foi configurado mostrar todas variaveis que implementamos e tambem podemos modificar.
+   - #### Clique em construir.
+   ![Texto alternativo](src/test/resources/readmeImg/novoJenkins03.png)
 
    #### Para acompanhar a execução dos testes clique na barra azul
    ![Texto alternativo](src/test/resources/readmeImg/jenkins44.png)
 
    #### Nesta tela podemos acompanhar o log dos nossos testes sendo executados
-   ![Texto alternativo](src/test/resources/readmeImg/jenkins45.png)
-    
+   ![Texto alternativo](src/test/resources/readmeImg/execucao01.png)
+
+   #### Podemos acompanhar o nosso teste sendo executado em tempo real clique ou digite no seu navegador
+   #### [Selenium Grid](http://localhost:4444/ui#) ou [http://localhost:4444/ui#](http://localhost:4444/ui#)
+   #### Clique em Sessions 
+   ![Texto alternativo](src/test/resources/readmeImg/execucao02.png)
+
+   ####  Clique no icone da camera
+   ![Texto alternativo](src/test/resources/readmeImg/execucao03.png) 
+   ####  Podemos acompanhar toda a execução dos nossos testes em tempo real.
+   #### Tambem temos acesso ao sistema e podemos realizar operações.
+
+   ![Texto alternativo](src/test/resources/readmeImg/execucao04.png) 
    #### Nesta tela podemos visualizar o termino dos testes neste caso tivemos testes que falharam \\^^/, e isso é bom.
    ![Texto alternativo](src/test/resources/readmeImg/jenkins46.png)
     
