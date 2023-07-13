@@ -52,6 +52,8 @@ services:
       - mantisbt
       - jenkins
     environment:
+      - LANGUAGE=pt_BR.UTF-8
+      - LANG=pt_BR.UTF-8
       - SE_OPTS=--log-level FINE
       - SE_EVENT_BUS_HOST=selenium-hub
       - SE_EVENT_BUS_PUBLISH_PORT=4442
@@ -77,6 +79,8 @@ services:
       - mantisbt
       - jenkins  
     environment:
+      - LANGUAGE=pt_BR.UTF-8
+      - LANG=pt_BR.UTF-8
       - SE_OPTS=--log-level FINE
       - SE_EVENT_BUS_HOST=selenium-hub
       - SE_EVENT_BUS_PUBLISH_PORT=4442
@@ -93,7 +97,7 @@ services:
       - VNC_NO_PASSWORD=1
 
   firefox:
-    image: selenium/node-firefox:4.10.0-20230607
+    image: selenium/node-firefox:latest
     shm_size: 2gb
     depends_on:
       - selenium-hub
@@ -102,6 +106,9 @@ services:
       - mantisbt
       - jenkins  
     environment:
+      - LANGUAGE=pt_BR.UTF-8
+      - LANG=pt_BR.UTF-8
+      - LC_ALL=pt_BR.UTF-8
       - SE_OPTS=--log-level FINE
       - SE_EVENT_BUS_HOST=selenium-hub
       - SE_EVENT_BUS_PUBLISH_PORT=4442
@@ -129,6 +136,9 @@ services:
       - "4442:4442"
       - "4443:4443"
       - "4444:4444"    
+    environment:
+      - LANGUAGE=pt_BR.UTF-8
+      - LANG=pt_BR.UTF-8
         
 networks:
   grid:

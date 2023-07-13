@@ -1,4 +1,4 @@
-# Framework de Teste WEB com SerenityBDD, cucumber com Ambiente CI/CD de Testes automatizados
+# Framework de Teste WEB com SerenityBDD, cucumber com Ambiente CI/CD com Jenkins e Selenium Grid 4 para Testes automatizados
 
 Neste tutorial, vamos explorar como configurar um ambiente Jenkins CI/CD, utilizando o Docker para montar um ambiente com os contêineres do MantisBT, MySQL e Jenkins, juntamente com o uso do framework de teste de API RestAssured. O ambiente de testes Docker fornecerá uma infraestrutura completa e escalável para executar testes de API do MantisBT API de forma automatizada e controlada.
 Ao Final deste tutorial teremos implementado um Pipepline com CI/CD completo de testes automatizados.
@@ -17,22 +17,22 @@ A combinação do Serenity BDD com o ambiente de testes Jenkins junto ao Seleniu
 Vamos começar a aproveitar os benefícios deste ambiente de teste poderoso para automatizar e validar seus testes automatizados!
 
 
-# Framework de Teste de API com RestAssured
+# Framework SerenityBDD, Cucumber, Selenium e Java de Teste WEB 
 
-Este é um projeto de framework de teste de API altamente eficiente, desenvolvido para simplificar e agilizar o processo de validação de APIs RESTful. Com base nas bibliotecas mais poderosas e populares do ecossistema Java, este framework oferece uma estrutura robusta e flexível para a automação de testes de API.
+Este é um projeto de framework de teste de WEB altamente eficiente, desenvolvido para simplificar e agilizar o processo de codificação de testes automatizados web. Com base nas bibliotecas mais poderosas e populares do ecossistema Java para testes automatizados web, este framework oferece uma estrutura robusta e flexível para a automação de testes de web.
 
 ## Recursos Destacados
 
 - **Java**: Linguagem de programação versátil, orientada a objetos e altamente portátil, com um vasto ecossistema de bibliotecas e ferramentas. É amplamente utilizado para o desenvolvimento de aplicativos empresariais, web e móveis devido à sua segurança, desempenho e facilidade de uso.
-
+ ####
 - **Cucumber**: Aproveite o poder do BDD (Behavior-Driven Development) com o Cucumber, uma biblioteca que permite escrever testes em uma linguagem de domínio específica (Gherkin) e executá-los em um formato legível para não desenvolvedores. Isso facilita a colaboração entre equipes técnicas e não técnicas.
-
-- **Selenium 4**: O Selenium 4 é uma atualização do popular framework de automação de testes que oferece suporte a recursos aprimorados, como suporte nativo para o W3C WebDriver, suporte para automação de aplicações desktop e uma API mais intuitiva e simplificada.
-
+ ####
+- **Selenium 4**: O Selenium 4 é uma atualização do popular framework de automação de testes que oferece suporte a recursos aprimorados, como suporte nativo para o W3C WebDriver, suporte para automação de aplicações WEB mais intuitiva e simplificada.
+ ####
 - **Serenity BDD**: O SerenityBDD é um framework de automação de testes que oferece relatórios detalhados e legíveis e integração com BDD, permitindo uma abordagem orientada a comportamento nos testes automatizados.
-
+ ####
 - **JUnit 4**: Aproveite os recursos do JUnit 4, um framework de teste unitário amplamente utilizado para Java. Ele permite que você defina casos de teste individuais, organize-os em suítes de testes e execute-os com eficiência. O JUnit 4 também oferece recursos avançados, como anotações de configuração e assertivas poderosas.
-
+ ####
 - **MySQL**: Aproveite a integração com o MySQL para armazenar e gerenciar dados em seus testes. O MySQL é um sistema de gerenciamento de banco de dados relacional amplamente utilizado, conhecido por sua confiabilidade e desempenho. Com o MySQL, você pode criar tabelas, inserir dados, realizar consultas e muito mais, tornando-o uma escolha poderosa para o armazenamento e recuperação de dados em seus testes.
 
 
@@ -289,7 +289,7 @@ Este é um projeto de framework de teste de API altamente eficiente, desenvolvid
     
 </details>
 
-#### Portas de rede : 80, 8989, 3606, 8080, 8081, 50000
+#### Portas de rede : 80, 8989, 3606, 8080, 8081, 50000, 7900
 
 #### Usuario root no Ubuntu
 
@@ -817,7 +817,7 @@ Para começar a utilizar este framework de teste de API, siga estas etapas:
 
     #### Preencha Relatorio XML de teste
     ```bash
-    target/surefire-reports/*.xml
+    ./target/surefire-reports/*.xml
     ```
     ![Texto alternativo](src/test/resources/readmeImg/jenkins35.png)
 
@@ -832,7 +832,7 @@ Para começar a utilizar este framework de teste de API, siga estas etapas:
 
     #### Preencha HTML directory to archive, tenha cuidado para preencher é necessario o espaço antes de 2023, hello bug jenkins. 
     ```bash
-    /target/site/ serenity/
+    ./target/site/serenity/
     ```
     ![Texto alternativo](src/test/resources/readmeImg/jenkins38.png)
 
@@ -901,47 +901,22 @@ Tambem iremos visualizar os relatorios gerados apos a execução dos testes.
 
    ![Texto alternativo](src/test/resources/readmeImg/execucao04.png) 
    #### Nesta tela podemos visualizar o termino dos testes neste caso tivemos testes que falharam \\^^/, e isso é bom.
-   ![Texto alternativo](src/test/resources/readmeImg/jenkins46.png)
+   ![Texto alternativo](src/test/resources/readmeImg/execucaoFinal01.png)
     
-   #### Clique em QA-API-MantisBT.
-   ![Texto alternativo](src/test/resources/readmeImg/jenkins47.png)
-
-   #### Agora iremos visualizar o resultado do teste atraves do junit.
-   - #### Clique no job em que executamos os testes, neste caso o job 11.
-   ![Texto alternativo](src/test/resources/readmeImg/jenkins48.png)
-
-   #### Clique em resultado de testes.
-   ![Texto alternativo](src/test/resources/readmeImg/jenkins49.png)
-
-   #### Os resultados dos testes são apresentados.
-   ![Texto alternativo](src/test/resources/readmeImg/jenkins50.png)
-
-   #### Agora iremos visualizar o resultado do teste atraves do ExtentReport.
-   - #### Clique em QA-API-MantisBT.
-   ![Texto alternativo](src/test/resources/readmeImg/jenkins50.png)
+   #### Ao final da execução clique em QA-MantisBT-WEB.
+   ![Texto alternativo](src/test/resources/readmeImg/ff01.png)
 
    #### Clique em HTML report.
-   ![Texto alternativo](src/test/resources/readmeImg/jenkins51.png)
+   ![Texto alternativo](src/test/resources/readmeImg/final01.png) 
+   
+   #### Por motivo de segurança o jenkins não carrega os elementos HTML.Clique em HTML report.
+   ![Texto alternativo](src/test/resources/readmeImg/final02.png)
 
-   #### O Nosso relatorio ExtentReport sera apresentado dessa forma pelo jenkins por medida de segurança.
-   #### Por isso vamos realizar o download do relatorio do ExtentReporter
-   - #### Clique em Back to QA-API-MantisBT
-   ![Texto alternativo](src/test/resources/readmeImg/jenkins52.png)
+   #### Agora vamos fazer o download do nosso relatorio no canto superior direito clique em zip para começar o download.
+   ![Texto alternativo](src/test/resources/readmeImg/final03.png)
 
-   #### Clique em Workspace
-   ![Texto alternativo](src/test/resources/readmeImg/jenkins53.png)
-
-   #### Clique em target
-   ![Texto alternativo](src/test/resources/readmeImg/jenkins54.png) 
-
-   #### Clique em 2023
-   ![Texto alternativo](src/test/resources/readmeImg/jenkins55.png)
-
-   #### Clique em (Todos os arquivos em .zip), aguarde o fim do download do relatorio
-   ![Texto alternativo](src/test/resources/readmeImg/jenkins56.png)
-
-   #### descompacte o arquivo e abra o arquivo index.html, pronto ja podemos visualizar o Relatorio do ExtentReport
-   ![Texto alternativo](src/test/resources/readmeImg/jenkins57.png) 
+   #### Extraia o relatorio acesse a pasta site/site/serenity/index.html e finalmente temos o nosso relatorio.
+   ![Texto alternativo](src/test/resources/readmeImg/final04.png) 
 
 
 ## Desafios Base 2
@@ -952,85 +927,197 @@ Tambem iremos visualizar os relatorios gerados apos a execução dos testes.
 
 ##### - [x] Tarefas pendentes
 
-### 1. [✔] Implementar 50 algoritmos de testes que manipulem uma aplicação cuja interface é uma API REST. 
+### 1. [✔] Implementar 50 algoritmos de testes que manipulem uma aplicação web (sugestões: Mantis ou TestLink) com Page Objects.
 
-   ##### Mais de 50 algoritmos de testes unicos de api implementados.
-   ##### Software utilizado para os testes MantisBT.
+#### A Arquitetura do framework segue o padrão Page Object 
+Padrão Page Object (PO): Um modelo de design para automação de testes que separa a lógica de interação com a página (Page) dos passos de teste (Step), mapeados pelos passos de definição (StepDefinitions), para facilitar a manutenção e reutilização de código.
+<details>
+  <summary>Implementação do padrão Page Object</summary>
 
-### 2. [✔] Alguns algoritmos de testes devem ler dados de uma planilha Excel para implementar Data-Driven. 
+  ![Texto alternativo](src/test/resources/readmeImg/DD01.png)
+</details>
+
+Page: Representa uma página ou componente da interface do usuário, encapsulando a lógica de interação com os elementos da página em métodos, promovendo a reutilização e a modularidade.
+<details>
+   <summary>Implementação do Page</summary>
+
+  ![Texto alternativo](src/test/resources/readmeImg/pp01.png)
+</details>
+
+Step: Define ações e verificações em um cenário de teste, usando os métodos da classe Page para interagir com a interface do usuário, facilitando a legibilidade e a manutenção dos testes.
+<details>
+  <summary>Implementação do Step</summary>
+
+![Texto alternativo](src/test/resources/readmeImg/pp02.png)
+</details>
+
+StepDefinitions: Mapeia os passos definidos em linguagem natural (Gherkin) para os métodos do Step, estabelecendo a conexão entre a especificação de teste e a implementação dos passos.
+<details>
+  <summary>Implementação do StepDefinitons</summary>
+
+![Texto alternativo](src/test/resources/readmeImg/pp03.png)
+</details>
+
+Test: É a execução dos cenários de teste usando os passos de definição e os page objects, garantindo a automação dos fluxos de teste e a verificação dos resultados esperados.
+<details>
+  <summary>Implementação do Test</summary>
+
+![Texto alternativo](src/test/resources/readmeImg/pp04.png)
+</details>
+
+##### Mais de 50 algoritmos de testes unicos de WEB implementados.
+##### Software utilizado para os testes MantisBT.
+
+### 2. [✔] Alguns algoritmos de testes devem ler dados para implementar Data-Driven. 
 
    ##### Implementação de Data-Driven pelo Cucumber.
-   ![Texto alternativo](src/test/resources/readmeImg/dataDriven01.png)
-   ![Texto alternativo](src/test/resources/readmeImg/dataDriven02.png)
-   ![Texto alternativo](src/test/resources/readmeImg/dataDriven03.png)
-   ![Texto alternativo](src/test/resources/readmeImg/dataDriven04.png)
+
+<details>
+  <summary>Cenario criar tarefa co sucesso</summary>
+   
+![Texto alternativo](src/test/resources/readmeImg/DD01.png)
+</details>
+<details>
+  <summary>Cenario criar novo projeto com sucesso</summary>
+
+![Texto alternativo](src/test/resources/readmeImg/DD02.png)
+</details>
+<details>
+  <summary>não criar novo projeto com o mesmo nome</summary>
+
+![Texto alternativo](src/test/resources/readmeImg/DD03.png)
+
+</details>
+<details>
+  <summary>excluir um projeto com sucesso</summary>
+
+![Texto alternativo](src/test/resources/readmeImg/DD04.png)
+
+</details>
+
 
 ### 3. [✔] Notem que 50 algoritmos de testes podem cobrir mais de 50 casos de testes se usarmos Data-Driven. Em outras palavras, implementar 50 CTs usando data-driven não é a mesma coisa que implementar 50 algoritmos de testes. </summary>
 
    ##### Mais de 50 casos de testes unicos implementados.
+<details>
+  <summary>Quantidade de testes</summary>
 
-### 4. [✔] O projeto deve tratar autenticação. Exemplo: OAuth2. 
+![Texto alternativo](src/test/resources/readmeImg/r01.png)
+</details>
 
-   #### Autenticação via token da API, passada atraves do headers.
+### 4. [✔] Os casos de testes precisam ser executados em no mínimo três navegadores. Utilizando o Selenium Grid.
+ O projeto foi executado em 3 navegadores chrome, edge e firefox em separado e single.
+ Com relação a execução do firefox por causa de um bug não foi possivel mudar o idioma para portugues, com isso os testes que utilizam o data driven quebraram.
+ O SerenityBdd ja oferece por linha de comando a opção de trocar o navegador.
+ Tambem foi implementado a Classe GlobalProperties que realiza a leitura do arquivo globalParameters.propeties para guardar outras informações. 
+<details>
+  <summary>Classe GlobalProperties</summary>
 
-### 5. [X] Pelo menos um teste deve fazer a validação usando REGEX (Expressões Regulares). </summary>
+![Texto alternativo](src/test/resources/readmeImg/gg01.png)
+</details>
+<details>
+  <summary>Arquivo globalParameters.propeties</summary>
 
-   #### Não implementado.
+![Texto alternativo](src/test/resources/readmeImg/gg02.png)
+</details>
 
-### 6. [✔] Pelo menos um algoritmo de teste deve usar código Groovy / Node.js ou outra linguagem para fazer scripts.. 
+Implementação de troca de dados das variaveis na execução do Jenkins 
+<details>
+  <summary>Troca de dados Jenkins</summary>
 
-#### Implementado uma classe em Groovy [ValidacaoGroovy.groovy](https://github.com/AlessandroLimaSilva/restassuredDemo/blob/main/src/test/java/br/com/ale/restassuredDemo/utils/ValidacaoGroovy.groovy) para realizar um assert
-![Texto alternativo](src/test/resources/readmeImg/groovy01.png)
+![Texto alternativo](src/test/resources/readmeImg/gg03.png)
+</details>
 
-![Texto alternativo](src/test/resources/readmeImg/groovy02.png)
-![Texto alternativo](src/test/resources/readmeImg/groovy03.png)
+### 5. [✔] Gravar screenshots ou vídeo automaticamente dos casos de testes.
+
+   #### Relatorio do Serenity com foto,velocidade,browser e sistema operacional do local da execução dos testes.
+<details>
+  <summary>Exemplo do Relatorio com foto.</summary>
+
+![Texto alternativo](src/test/resources/readmeImg/gg04.png)
+</details>
+
+#### É possivel acompanhar os testes em tempo real de execução, e se necessario é possivel habilitar a gravação de videos no Selenium Grid 4.
+<details>
+  <summary>Visualizando o teste em execução.</summary>
+
+![Texto alternativo](src/test/resources/readmeImg/execucao03.png)
+</details>
+
+### 6. O projeto deverá gerar um relatório de testes automaticamente com screenshots ou vídeos embutidos. Sugestões: Allure Report ou ExtentReport.
+#### O projeto gera automaticamente ao final da execução um relatorio do Serenity com foto,velocidade,browser e sistema operacional do local da execução dos testes.
+<details>
+  <summary>Exemplo do Relatorio com foto.</summary>
+
+![Texto alternativo](src/test/resources/readmeImg/gg04.png)
+</details>
+
+#### É possivel acompanhar os testes em tempo real de execução, e se necessario é possivel habilitar a gravação de videos no Selenium Grid 4.
+
+### 7. [✔] A massa de testes deve ser preparada neste projeto, seja com scripts carregando massa nova no BD ou com restore de banco de dados.
+ #### O projeto possui Classes e metodos CRUD para realizar qualquer ações no Banco de dados.
+<details>
+  <summary>ConnectionFactory.java</summary>
+
+![Texto alternativo](src/test/resources/readmeImg/bd01.png)
+</details>    
+<details>
+  <summary>DeleteDAO.java</summary>
+
+![Texto alternativo](src/test/resources/readmeImg/bd02.png)
+</details>    
+<details>
+  <summary>InsertDAO.java</summary>
+
+![Texto alternativo](src/test/resources/readmeImg/bd03.png)
+</details>    
+<details>
+  <summary>SelectDAO.java</summary>
+
+![Texto alternativo](src/test/resources/readmeImg/bd04.png)
+</details>    
+<details>
+  <summary>UpdateDAO.java</summary>
+
+![Texto alternativo](src/test/resources/readmeImg/bd05.png)
+</details>    
+
+  #### O projeto é proprietário de um Banco de Dados Mysql sendo construido e populado antes da execução dos testes.
+<details>
+  <summary>MassaDeTeste.sql</summary>
+
+![Texto alternativo](src/test/resources/readmeImg/bd06.png)
+</details>    
+<details>
+  <summary>Mysql</summary>
+
+![Texto alternativo](src/test/resources/readmeImg/bd07.png)
+</details>    
+<details>
+  <summary>Mysql tabelas</summary>
+
+![Texto alternativo](src/test/resources/readmeImg/bd08.png)
+</details>
+
+### 8. [✔] O projeto deve injetar Javascript para executar alguma operação na tela. O objetivo aqui é exercitar a injeção de Javascript dentro do código do Selenium.
+ #### Implementação de dois metodos de injeção de javaScript que realizam a injeção.
+ #### O metodo selectOptionByTextJavaScript realiza a busca pelo texto passado em um loop e quando encontra o texto realiza a injeção do indice no elemento.
+<details>
+  <summary>BasePage.selectOptionByTextJavaScript(WebElement selectElement, String optionText)</summary>
+
+![Texto alternativo](src/test/resources/readmeImg/js01.png)
+</details>    
+
+#### O metodo selectOptionByTextJavaScript realiza a busca pelo texto passado em um loop e quando encontra o texto realiza a injeção do indice e atualiza o elemento .
+<details>
+  <summary>BasePage.selectAndRefreshOptionByTextJavaScript(WebElement selectElement, String optionText)</summary>
+
+![Texto alternativo](src/test/resources/readmeImg/js02.png)
+</details>    
 
 
-### 7. [✔] O projeto deverá gerar um relatório de testes automaticamente. 
-
-#### O projeto gera automaticamente um relatorio do ExtentReport .
-![Texto alternativo](src/test/resources/readmeImg/relatorio01.png)
-
-#### O projeto gera automaticamente um relatorio do junit que pode ser visualizado no jenkins .
-![Texto alternativo](src/test/resources/readmeImg/jenkins50.png)
-
-### 8. [✔] Implementar pelo menos dois ambientes (desenvolvimento / homologação) 
-
-#### O Projeto foi desenvolvido para implementar quantos ambientes forem necessarios.
-#### Neste caso foram implementados 3 ambientes hml, dev e local.
-#### basta apenas adicionar o ambiente desejado atraves do arquivo [globalParameters.propeties](https://github.com/AlessandroLimaSilva/restassuredDemo/blob/main/src/globalParameters.propeties) e implementar na classe [GlobalParameters.java](https://github.com/AlessandroLimaSilva/restassuredDemo/blob/main/src/test/java/br/com/ale/restassuredDemo/utils/GlobalParameters.java)
-#### Na configuração realizada no job do jenkins é passado em qual ambiente o teste sera executado.
-![Texto alternativo](src/test/resources/readmeImg/jenkins43.png)
-![Texto alternativo](src/test/resources/readmeImg/jenkins29.png)
-#### No jenkins é possivel utilizar 2 ambientes hml e dev.
-
-### 9. [✔] A massa de dados dos testes deve ser preparada neste projeto, seja com scripts carregando massa nova no BD ou com restore de banco de dados. 
-
-#### A construção do banco de dados e a massa de dados é realizada atraves da execução de um algortimo de teste e configurada em um passo anterior a execução dos testes no jenkins.
-![Texto alternativo](src/test/resources/readmeImg/jenkins231.png)
-#### Isso tambem poderia ser feito atraves de um shell script que executaria o caso de teste responsavel por criar e popular o banco de dados utilizado pela automação.
-#### Sendo que este workaround so foi implementado, dados que as bibliotecas utilizadas no framework não dispoem de uma solução para executar um metodo antes da execução.
-
-
-### 10. [✔] Executar testes em paralelo. Pelo menos duas threads (25 testes cada).
-
-#### Dado que nosso testes são executados pelo maven-surefire-plugin.
-![Texto alternativo](src/test/resources/readmeImg/thread05.png)
-#### Configurei o paralelismo no maven-surefire-plugin para 4 threads.
-![Texto alternativo](src/test/resources/readmeImg/thread06.png)
-#### O cucumber trabalha com paralelismo dividindo cada caso de teste em duas thread uma fica responsavel pela feature e a outra pela execução do teste.
-#### Assim temos 2 threads para cada caso de teste, totalizando 8 threads para executar nossos testes.
-#### podemos visualizar as threads no log de execução dos testes no jenkins, e local tambem.
-![Texto alternativo](src/test/resources/readmeImg/thread01.png)
-![Texto alternativo](src/test/resources/readmeImg/thread02.png)
-![Texto alternativo](src/test/resources/readmeImg/thread03.png)
-![Texto alternativo](src/test/resources/readmeImg/thread04.png)
-
-### - 11. [✔] Execução ambiente CI/CD Jenkins montado em docker
-#### As instruções e arquivos necessarios para construir um ambiente de teste CI/CD estão documentadas nesse repositorio.
+### - 9. [✔] Execução ambiente CI/CD Jenkins montado em docker
+#### O projeto possui a implementação completa de execução de um ambiente CI/CD
+#### As instruções e arquivos necessarios para o deploy do ambiente de teste CI/CD estão documentadas nesse repositorio.
 #### Assim não é necessario utilizar o servidor de terceiros.
-
-## Personalização e Expansão
-
-Este framework de teste de API é altamente personalizável e pode ser facilmente expandido para atender às necessidades exclusivas do seu projeto. Você pode adicionar novos casos de teste, criar classes utilitárias adicionais e integrar bibliotecas adicionais conforme necessário.
 

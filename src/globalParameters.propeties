@@ -1,4 +1,4 @@
-enviroment=local
+enviroment=dev
 
 #<== hml ==>
 hml.url.default=http://mantisbt:80
@@ -14,10 +14,10 @@ hml.autenticator.password=root
 hml.token=
 
 #<== dev parameters ==>
-dev.url.default=http://mantisbt:80
+dev.url.default=http://172.29.0.3:80
 dev.db.url=jdbc:mysql://localhost:3306
-dev.db.url.mantis=jdbc:mysql://0.0.0.0:3306/bugtracker
-dev.db.url.teste=jdbc:mysql://0.0.0.0:3306/dadosdeteste
+dev.db.url.mantis=jdbc:mysql://localhost:3306/bugtracker
+dev.db.url.teste=jdbc:mysql://localhost:3306/dadosdeteste
 dev.db.name=
 dev.db.user=root
 dev.db.password=root

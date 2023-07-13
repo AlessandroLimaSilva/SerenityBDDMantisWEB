@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
                 "org.ale.stepdefinitions",
                 "org.ale.hooks",},
         publish = true,
-        tags = "@automatizado or @T")
+        tags = "@automatizado")
 
 public class CriarTarefasTest {
 }
