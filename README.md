@@ -1,7 +1,9 @@
 # Framework de Teste WEB com SerenityBDD, cucumber com Ambiente CI/CD com Jenkins e Selenium Grid 4 para Testes automatizados
 
-Neste tutorial, vamos explorar como configurar um ambiente Jenkins CI/CD, utilizando o Docker para montar um ambiente com os contêineres do MantisBT, MySQL e Jenkins, juntamente com o uso do framework de teste de API RestAssured. O ambiente de testes Docker fornecerá uma infraestrutura completa e escalável para executar testes de API do MantisBT API de forma automatizada e controlada.
-Ao Final deste tutorial teremos implementado um Pipepline com CI/CD completo de testes automatizados.
+##### Neste tutorial, vamos explorar como configurar um ambiente Jenkins CI/CD com Selenium Grid 4 para testes automatizados.
+##### Utilizando o Docker para montar um ambiente com os contêineres do MantisBT, MySQL, Jenkins e Selenium Grid 4, juntamente com o uso do Framework de teste de WEB SerenityBDD. 
+##### O ambiente de testes Docker fornecerá uma infraestrutura completa e escalável para executar testes de WEB no MantisBT de forma automatizada e controlada.
+##### Ao Final deste tutorial teremos implementado um Pipepline com CI/CD completo de testes automatizados WEB.
 
 ## Ambiente de Testes Docker
 
