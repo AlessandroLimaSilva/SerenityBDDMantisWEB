@@ -23,7 +23,7 @@ Este é um projeto de framework de teste de WEB altamente eficiente, desenvolvid
 
 ## Recursos Destacados
 
-- **Java**: Linguagem de programação versátil, orientada a objetos e altamente portátil, com um vasto ecossistema de bibliotecas e ferramentas. É amplamente utilizado para o desenvolvimento de aplicativos empresariais, web e móveis devido à sua segurança, desempenho e facilidade de uso.
+- **Java 8**: Linguagem de programação versátil, orientada a objetos e altamente portátil, com um vasto ecossistema de bibliotecas e ferramentas. É amplamente utilizado para o desenvolvimento de aplicativos empresariais, web e móveis devido à sua segurança, desempenho e facilidade de uso.
  ####
 - **Cucumber**: Aproveite o poder do BDD (Behavior-Driven Development) com o Cucumber, uma biblioteca que permite escrever testes em uma linguagem de domínio específica (Gherkin) e executá-los em um formato legível para não desenvolvedores. Isso facilita a colaboração entre equipes técnicas e não técnicas.
  ####
@@ -35,6 +35,41 @@ Este é um projeto de framework de teste de WEB altamente eficiente, desenvolvid
  ####
 - **MySQL**: Aproveite a integração com o MySQL para armazenar e gerenciar dados em seus testes. O MySQL é um sistema de gerenciamento de banco de dados relacional amplamente utilizado, conhecido por sua confiabilidade e desempenho. Com o MySQL, você pode criar tabelas, inserir dados, realizar consultas e muito mais, tornando-o uma escolha poderosa para o armazenamento e recuperação de dados em seus testes.
 
+## Arquitetura Page Object
+   - **Padrão Page Object (PO)**: Um modelo de design para automação de testes que separa a lógica de interação com a página (Page) dos passos de teste (Step), mapeados pelos passos de definição (StepDefinitions), para facilitar a manutenção e reutilização de código.
+   - <details>
+      <summary>Implementação do padrão Page Object</summary>
+
+     ![Texto alternativo](src/test/resources/readmeImg/DD01.png)
+   </details>
+
+   - **Page**: Representa uma página ou componente da interface do usuário, encapsulando a lógica de interação com os elementos da página em métodos, promovendo a reutilização e a modularidade.
+   - <details>
+      <summary>Implementação do Page</summary>
+
+      ![Texto alternativo](src/test/resources/readmeImg/pp01.png)
+   </details>
+
+   - **Step**: Define ações e verificações em um cenário de teste, usando os métodos da classe Page para interagir com a interface do usuário, facilitando a legibilidade e a manutenção dos testes.
+   - <details>
+      <summary>Implementação do Step</summary>
+
+      ![Texto alternativo](src/test/resources/readmeImg/pp02.png)
+   </details>
+
+   - **StepDefinitions**: Mapeia os passos definidos em linguagem natural (Gherkin) para os métodos do Step, estabelecendo a conexão entre a especificação de teste e a implementação dos passos.
+   - <details>
+      <summary>Implementação do StepDefinitons</summary>
+
+      ![Texto alternativo](src/test/resources/readmeImg/pp03.png)
+   </details>
+
+   - **Test**: É a execução dos cenários de teste usando os passos de definição e os page objects, garantindo a automação dos fluxos de teste e a verificação dos resultados esperados.
+   - <details>
+      <summary>Implementação do Test</summary>
+
+     ![Texto alternativo](src/test/resources/readmeImg/pp04.png)
+   </details>
 
 ## Configuração e Execução
     
